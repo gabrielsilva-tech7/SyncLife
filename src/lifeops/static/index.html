@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#06111f">
+
+    <title>Sync</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+            <div class="marca">
+                <div class="logo">S</div>
+
+                <div>
+                    <h1>Sync</h1>
+                    <p>Juntos, em sintonia.</p>
+                </div>
+            </div>
+
+            <div class="perfil">G & A</div>
+        </header>
+
+
+        <section class="hero">
+            <div>
+                <span class="legenda">VISÃO GERAL</span>
+                <h2>Organize a rotina de vocês.</h2>
+                <p>Tarefas, compromissos e gastos em um só lugar.</p>
+            </div>
+        </section>
+
+
+        <section class="cards">
+
+            <article class="card">
+                <span>Pendentes</span>
+                <strong id="tarefas-pendentes">0</strong>
+                <small>Tarefas para fazer</small>
+            </article>
+
+            <article class="card">
+                <span>Concluídas</span>
+                <strong id="tarefas-concluidas">0</strong>
+                <small>Tarefas finalizadas</small>
+            </article>
+
+            <article class="card">
+                <span>Compromissos</span>
+                <strong id="total-compromissos">0</strong>
+                <small>Compromissos salvos</small>
+            </article>
+
+            <article class="card destaque">
+                <span>Total gasto</span>
+                <strong id="total-gastos">R$ 0,00</strong>
+                <small>Gastos registrados</small>
+            </article>
+
+        </section>
+
+
+        <section class="grid">
+
+            <!-- TAREFAS -->
+
+            <article class="painel">
+
+                <div class="painel-topo">
+                    <div>
+                        <span class="painel-legenda">ORGANIZAÇÃO</span>
+                        <h3>Tarefas</h3>
+                    </div>
+
+                    <button onclick="abrirModal('modal-tarefa')">
+                        + Nova tarefa
+                    </button>
+                </div>
+
+                <div id="lista-tarefas" class="lista"></div>
+
+            </article>
+
+
+            <!-- COMPROMISSOS -->
+
+            <article class="painel">
+
+                <div class="painel-topo">
+                    <div>
+                        <span class="painel-legenda">AGENDA</span>
+                        <h3>Compromissos</h3>
+                    </div>
+
+                    <button onclick="abrirModal('modal-compromisso')">
+                        + Novo
+                    </button>
+                </div>
+
+                <div id="lista-compromissos" class="lista"></div>
+
+            </article>
+
+
+            <!-- GASTOS -->
+
+            <article class="painel painel-gastos">
+
+                <div class="painel-topo">
+                    <div>
+                        <span class="painel-legenda">FINANÇAS</span>
+                        <h3>Gastos</h3>
+                    </div>
+
+                    <button onclick="abrirModal('modal-gasto')">
+                        + Novo gasto
+                    </button>
+                </div>
+
+                <div id="lista-gastos" class="lista"></div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- MODAL TAREFA -->
+
+    <div id="modal-tarefa" class="modal">
+
+        <div class="modal-conteudo">
+
+            <div class="modal-topo">
+                <div>
+                    <span class="painel-legenda">TAREFAS</span>
+                    <h2>Nova tarefa</h2>
+                </div>
+
+                <button class="fechar"
+                    onclick="fecharModal('modal-tarefa')">×</button>
+            </div>
+
+            <p class="modal-texto">
+                Adicione algo que vocês precisam fazer.
+            </p>
+
+            <label>Descrição</label>
+
+            <input
+                id="descricao-tarefa"
+                type="text"
+                placeholder="Ex: Organizar documentos">
+
+            <div class="modal-acoes">
+
+                <button
+                    class="btn-secundario"
+                    onclick="fecharModal('modal-tarefa')">
+                    Cancelar
+                </button>
+
+                <button onclick="salvarTarefa()">
+                    Adicionar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL COMPROMISSO -->
+
+    <div id="modal-compromisso" class="modal">
+
+        <div class="modal-conteudo">
+
+            <div class="modal-topo">
+
+                <div>
+                    <span class="painel-legenda">AGENDA</span>
+                    <h2>Novo compromisso</h2>
+                </div>
+
+                <button
+                    class="fechar"
+                    onclick="fecharModal('modal-compromisso')">×</button>
+
+            </div>
+
+            <p class="modal-texto">
+                Registre um compromisso importante.
+            </p>
+
+            <label>Descrição</label>
+
+            <input
+                id="descricao-compromisso"
+                type="text"
+                placeholder="Ex: Cinema sábado">
+
+            <div class="modal-acoes">
+
+                <button
+                    class="btn-secundario"
+                    onclick="fecharModal('modal-compromisso')">
+                    Cancelar
+                </button>
+
+                <button onclick="salvarCompromisso()">
+                    Adicionar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL GASTO -->
+
+    <div id="modal-gasto" class="modal">
+
+        <div class="modal-conteudo">
+
+            <div class="modal-topo">
+
+                <div>
+                    <span class="painel-legenda">FINANÇAS</span>
+                    <h2>Novo gasto</h2>
+                </div>
+
+                <button
+                    class="fechar"
+                    onclick="fecharModal('modal-gasto')">×</button>
+
+            </div>
+
+            <p class="modal-texto">
+                Registre um gasto de vocês.
+            </p>
+
+            <label>Nome</label>
+
+            <input
+                id="nome-gasto"
+                type="text"
+                placeholder="Ex: Lanche">
+
+            <label>Valor</label>
+
+            <input
+                id="valor-gasto"
+                type="number"
+                step="0.01"
+                min="0"
+                placeholder="0,00">
+
+            <div class="modal-acoes">
+
+                <button
+                    class="btn-secundario"
+                    onclick="fecharModal('modal-gasto')">
+                    Cancelar
+                </button>
+
+                <button onclick="salvarGasto()">
+                    Adicionar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NOTIFICAÇÃO -->
+
+    <div id="toast" class="toast"></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
