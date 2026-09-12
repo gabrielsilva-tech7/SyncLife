@@ -11,9 +11,11 @@ from lifeops.banco import (
     excluir_compromisso,
     listar_gastos,
     adicionar_gasto,
-    excluir_gasto
+    excluir_gasto,
+    criar_tabelas
 )
 app = FastAPI()
+criar_tabelas()
 
 class Tarefa(BaseModel):
     descricao: str
